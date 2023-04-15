@@ -1,0 +1,50 @@
+.contractForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.contractForm h2 {
+  margin-bottom: 20px;
+}
+
+.contractForm div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.contractForm label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.contractForm input[type='text'] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contractForm button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-image: linear-gradient(45deg, #5b5ab8, #9365b9);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.contractForm button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
