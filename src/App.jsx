@@ -6,11 +6,11 @@ import ContractForm from './components/ContractForm/ContractForm';
 import { abiKey } from './api/contract/abi';
 
 const CONTRACT_ADDRESS = "0x53564069dedc47009b701099eb838381a77abf87";
-export const contract = new window.web3.eth.Contract(abiKey, CONTRACT_ADDRESS);
 
 
 function App() {
   const [userAddress, setUserAddress] = useState(null);
+  const [contract, setContract] = useState(null);
 
   const handleLogin = async () => {
     if (window.ethereum) {
@@ -24,6 +24,11 @@ function App() {
           console.log(selectedAccount);
           setUserAddress(selectedAccount);
           window.localStorage.setItem('userAddress', selectedAccount);
+          // Initialize the contract
+        const web3 = window.ethereum;
+        const contract = new web3.Contract(abiKey, CONTRACT_ADDRESS);
+        setContract(contract);
+
         } else {
           throw new Error('No account selected!');
         }
@@ -74,7 +79,7 @@ function App() {
           <VerifyDocument contract={contract}/>
         </div>
       ) : (
-        <p>Please login with MetaMask to access the app.</p>
+        <p className='metaMask-Login'>Please login with MetaMask to access the app.</p>
       )}
     </div>
   );
