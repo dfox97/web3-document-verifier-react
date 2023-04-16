@@ -5,3 +5,19 @@
   width: 100vw;
   margin-top: 3%;
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 15% 0 35%;
+  align-items: center;
+}
+
+
+.view-data-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

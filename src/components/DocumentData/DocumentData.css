@@ -1,0 +1,18 @@
+.document-data {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.document-data h3 {
+  margin-top: 0;
+}
+
+.document-data-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.view-data-button-container {
+  margin-bottom: 10px;
+}

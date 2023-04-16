@@ -1,0 +1,51 @@
+.verifyDocument {
+
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  width: 100%;
+  max-width: 300px; /* Decrease the max-width */
+  margin: 20px;
+}
+.verifyDocument a {
+  word-wrap: break-word;
+}
+
+.verifyDocument h2 {
+  margin-bottom: 20px;
+}
+
+.verifyDocument form {
+  display: flex;
+  flex-direction: column;
+}
+
+.verifyDocument label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.verifyDocument input[type='text'] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+
+
+.verifyDocument button:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+.verification-failed {
+  color: red;
+  margin-top: 20px;
+}
+
+.verification-success {
+  color: green;
+  margin-top: 20px;
+}

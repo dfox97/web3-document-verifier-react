@@ -1,18 +1,31 @@
 import React, { useState } from 'react';
 import './ContractForm.css';
 
-const ContractForm = ({ onDocumentSubmit }) => {
+const ContractForm = ({ contract, userAddress }) => {
   const [fileName, setFileName] = useState('');
   const [fileHash, setFileHash] = useState('');
   const [fileURL, setFileURL] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fileName || !fileHash || !fileURL) {
       alert('Please fill in all fields.');
       return;
     }
-    onDocumentSubmit({ fileName, fileHash, fileURL });
+
+    try {
+      // Submit the document to the smart contract
+      await contract.methods.add(fileName, fileHash, fileURL).send({
+        from: userAddress,
+        gas: 3000000,
+      });
+
+      // Display success message
+      alert('Document submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting document', error);
+      alert('Error submitting document');
+    }
   };
 
   return (
@@ -46,7 +59,7 @@ const ContractForm = ({ onDocumentSubmit }) => {
             onChange={(e) => setFileURL(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button className="button-submit" type="submit">Submit</button>
       </form>
     </div>
   );

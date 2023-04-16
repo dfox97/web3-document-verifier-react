@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 2%;
 }
 
 .loginWrapper {
@@ -21,7 +21,6 @@ button {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
-  margin-top: 10px; /* Add this line to separate the logo and button */
 }
 
 button:hover {
@@ -41,4 +40,5 @@ button:hover {
 .logo {
   width: 20%;
   height: auto;
+  margin-bottom: -3%;
 }

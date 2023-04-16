@@ -3,9 +3,14 @@ import './App.css';
 import EthLogin from './components/EthLogin/EthLogin';
 import VerifyDocument from './components/VerifyDocument/VerifyDocument';
 import ContractForm from './components/ContractForm/ContractForm';
-import { abiKey } from './api/contract/abi';
+import abiKey from './api/contract/abi';
+import Web3 from 'web3';
+import DocumentData from './components/DocumentData/DocumentData';
+import './components/DocumentData/DocumentData.css';
 
-const CONTRACT_ADDRESS = "0x53564069dedc47009b701099eb838381a77abf87";
+
+// https://sepolia.etherscan.io/tx/0x9cfaf63edcf9beffff802243d2841b1bb13fa12c6fee161a160debbb1150ee9e
+const CONTRACT_ADDRESS = "0xc447Da346b84b6973799CF08Fb1fb6F71f5b184B";
 
 
 function App() {
@@ -18,17 +23,17 @@ function App() {
         const accounts = await window.ethereum.request({
           method: 'eth_requestAccounts',
         });
-
+        const provider = window.ethereum
         if (accounts.length > 0) {
           const selectedAccount = accounts[0];
-          console.log(selectedAccount);
           setUserAddress(selectedAccount);
-          window.localStorage.setItem('userAddress', selectedAccount);
+          window.localStorage.setItem('userAddress', selectedAccount); 
           // Initialize the contract
-        const web3 = window.ethereum;
-        const contract = new web3.Contract(abiKey, CONTRACT_ADDRESS);
-        setContract(contract);
+          const web3 = new Web3(provider);
+          const contract = new web3.eth.Contract(abiKey, CONTRACT_ADDRESS);
 
+          setContract(contract, selectedAccount);
+          // fetchDocuments(contract, selectedAccount);
         } else {
           throw new Error('No account selected!');
         }
@@ -39,32 +44,13 @@ function App() {
       alert('No ETH browser extension detected.');
     }
   };
+  
 
   const handleLogout = () => {
     setUserAddress(null);
     window.localStorage.removeItem('userAddress');
   };
 
-  const handleDocumentSubmit = async (fileName, fileHash, fileURL) => {
-    try {
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      const account = accounts[0];
-    
-      // Submit the document to the smart contract
-      await contract.methods.add(fileName, fileHash, fileURL).send({
-        from: account,
-        gas: 3000000,
-      });
-    
-      // Display success message
-      alert('Document submitted successfully!');
-    } catch (error) {
-      console.error('Error submitting document', error);
-      alert('Error submitting document');
-    }
-  }
 
   return (
     <div className="App">
@@ -75,9 +61,16 @@ function App() {
       />
       {userAddress ? (
         <div>
-          <ContractForm onDocumentSubmit={handleDocumentSubmit} />
-          <VerifyDocument contract={contract}/>
+        <div className="form-container">
+         
+          <ContractForm contract={contract} userAddress={userAddress} />
+   
+          <VerifyDocument contract={contract} userAddress={userAddress} />
         </div>
+        <div className="view-data-button-container">
+          <DocumentData contract={contract} userAddress={userAddress} />
+        </div>
+      </div>
       ) : (
         <p className='metaMask-Login'>Please login with MetaMask to access the app.</p>
       )}

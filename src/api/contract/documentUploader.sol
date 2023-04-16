@@ -1,7 +1,7 @@
-// SPDX-License-Identifier: TEST-DANNY
-pragma solidity ^0.8.0;
+// SPDX-License-Identifier: TEST-DANNY / Sepolia test network
+//https://sepolia.etherscan.io/tx/0x9cfaf63edcf9beffff802243d2841b1bb13fa12c6fee161a160debbb1150ee9e
+pragma solidity ^0.8.19;
 contract TestIpfsDocument {
-
 
     struct File {
         string fileName;
@@ -32,8 +32,8 @@ contract TestIpfsDocument {
         return file.hash;
     }
 
-    function verifyDocument(uint id, string memory hashToVerify) public view returns (bool){
-       File memory file = files[msg.sender][id];
+    function verifyDocument(uint index, string memory hashToVerify) public view returns (bool){
+       File memory file = files[msg.sender][index];
        return (keccak256(abi.encodePacked((hashToVerify))) == keccak256(abi.encodePacked((file.hash))));
      }
 }
